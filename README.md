@@ -1,8 +1,8 @@
 # Assignment 4. Patient Zero
 
-Student ID:
-Name:
-Group:
+Student ID:251988
+Name:Adilzhan Kairgaliyev
+Group:SE-2540
 
 This file is the report. Fill it in as you go. How to start: `START_HERE.md`. The task: `docs/Assignment4.pdf`.
 
