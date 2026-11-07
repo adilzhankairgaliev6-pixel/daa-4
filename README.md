@@ -10,15 +10,15 @@ This file is the report. Fill it in as you go. How to start: `START_HERE.md`. Th
 
 The 9 lines your program prints on your data (`java -cp out Main`):
 
-    Mutations:
-    Shared core:
-    Marker hits:
-    First hit:
-    Border length:
-    Shared words:
-    Tests needed:
-    Cheapest testing:
-    Longest chain:
+    Mutations:85
+    Shared core:1022
+    Marker hits:5
+    First hit:5315
+    Border length:4
+    Shared words:418
+    Tests needed:42
+    Cheapest testing:171
+    Longest chain:28
 
 My outbreak report (a screenshot of `output/outbreak.html`):
 
@@ -48,9 +48,9 @@ Milliseconds, average of 3 runs, from `java -cp out Bench`.
 
 | test | size | time |
 |---|---|---|
-| naive search | 20 000 / 40 000 / 80 000 | |
-| KMP | 20 000 / 40 000 / 80 000 | |
-| edit distance | 500 / 1000 / 2000 / 4000 | |
+| naive search | 20 000 / 40 000 / 80 000 |108,5 / 162,3 / 374,8|
+| KMP | 20 000 / 40 000 / 80 000 |3,7 / 1,1 / 0,7|
+| edit distance | 500 / 1000 / 2000 / 4000 |9,2 / 12,2 / 37,4 / 150,5|
 
 What do the numbers say about how the time grows? When you double the size, by how much does each time grow? Two or three sentences.
 
@@ -60,11 +60,11 @@ n is the length of the text (or of a strain), m the length of the pattern, k the
 
 | algorithm | time | space | assumptions |
 |---|---|---|---|
-| Edit distance | | | |
-| LCS | | | |
-| Prefix function and KMP | | | |
-| Rabin-Karp (shared words) | | | |
-| Tree DP | | | |
+| Edit distance |O(n*m)|O(n*m)|(n+1)×(m+1) table, cell testing in O(1)|
+| LCS |O(n*m)|O(n*m)|the same, max/diagonal rule|
+| Prefix function and KMP |O(n+m)|O(m)|the pointer in the text does not go back, the rollbacks in total are no more than n|
+| Rabin-Karp (shared words) |O(n+m)|O(m)|The hash is updated in O(1) time; if there are many identical hashes, comparing the characters can take up to O(n·k) time.|
+| Tree DP |O(v)|O(v)|Each person and each connection is visited once.|
 
 ## Before you submit
 
