@@ -17,8 +17,40 @@ public class Outbreak {
      * Main calls this twice: with all costs equal to 1 (the line "Tests needed") and with the real costs ("Cheapest testing").
      */
     public static boolean[] cheapestTests(int n, int[][] nb, int[] cost) {
-        // TODO Mission 5a
-        return new boolean[n];
+        boolean[] tested = new boolean[n];
+        if (n == 0) return tested;
+
+        int[] parent = new int[n];
+        int[] order = new int[n];
+        boolean[] seen = new boolean[n];
+        int head = 0, tail = 0;
+        order[tail++] = 0; seen[0] = true; parent[0] = -1;
+        while (head < tail) {
+            int v = order[head++];
+            for (int c : nb[v]) {
+                if (!seen[c]) { seen[c] = true; parent[c] = v; order[tail++] = c; }
+            }
+        }
+
+        long[] in = new long[n], out = new long[n];
+        for (int idx = tail - 1; idx >= 0; idx--) {
+            int v = order[idx];
+            in[v] = cost[v];
+            out[v] = 0;
+            for (int c : nb[v]) {
+                if (c == parent[v]) continue;
+                in[v] += Math.min(in[c], out[c]);
+                out[v] += in[c];
+            }
+        }
+
+        for (int idx = 0; idx < tail; idx++) {
+            int v = order[idx];
+            if (parent[v] == -1) tested[v] = in[v] <= out[v];
+            else if (!tested[parent[v]]) tested[v] = true;
+            else tested[v] = in[v] <= out[v];
+        }
+        return tested;
     }
 
     /**
